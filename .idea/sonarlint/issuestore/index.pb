@@ -85,3 +85,13 @@ w
 G.idea/sonarlint/issuestore/e/4/e432e8fa7ee4f916f309a0b6f2ababbb200b2d71,a\1\a103b025f6b9e0cd0fc2a6e596fd5b69fe1e68e8
 w
 G.idea/sonarlint/issuestore/f/0/f0c2a1d320ffdee485e828642de8023d27737b99,7\8\781c12a38c3921e1ae0b0f617df7961f633af240
+[
++todo-app/src/app/views/todos/todos.model.ts,7\6\76f7553b2783cb3bed9c3a2f5dcb55805c659f00
+]
+-todo-app/src/app/views/todos/todos.service.ts,d\3\d3f38902bc98b9cd030ff832467e8cb14322a2d0
+_
+/todo-app/src/app/views/todos/todos.component.ts,7\4\74dda29cc467c14996dceee286724b2b0d688b18
+a
+1todo-app/src/app/views/todos/todos.component.html,e\7\e798fbd88b9867df5adaf3566d53ada378920077
+c
+3todo-app/src/app/views/todos/todo/todo.component.ts,1\5\15f854497b8be362a414970e43596776482c4ec6
