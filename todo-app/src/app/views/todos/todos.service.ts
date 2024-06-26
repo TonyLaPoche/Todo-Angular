@@ -10,20 +10,42 @@ export class TodosService {
         {
             "userId": 1,
             "id": 1,
-            "title": "delectus aut autem",
-            "completed": false
+            "title": "Récupérer les todos",
+            "completed": true,
+            "priority": 1,
+
         },
         {
             "userId": 1,
             "id": 2,
-            "title": "quis ut nam facilis et officia qui",
-            "completed": true
+            "title": "Ajouter une todo",
+            "completed": true,
+            "priority": 2,
         },
         {
             "userId": 1,
             "id": 3,
-            "title": "fugiat veniam minus",
-            "completed": false
+            "title": "Modifier une todo",
+            "completed": true,
+            "priority": 3,
+        },{
+            "userId": 1,
+            "id": 4,
+            "title": "Supprimer une todo",
+            "completed": true,
+            "priority": 4,
+        },{
+            "userId": 1,
+            "id": 5,
+            "title": "déplacer une todo",
+            "completed": false,
+            "priority": 5
+        },{
+            "userId": 1,
+            "id": 6,
+            "title": "trier les todos",
+            "completed": false,
+            "priority": 6
         },
     ]);
     todos = this.#todos.asReadonly()

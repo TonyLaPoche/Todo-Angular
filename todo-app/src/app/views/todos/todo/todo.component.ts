@@ -13,7 +13,14 @@ import {JsonPipe} from "@angular/common";
   ],
   template: `
       <li class="item">
-          <input type="checkbox" [checked]="todo().completed" (click)="setTodo(!todo().completed)">
+          
+        <div class="config">
+          <span class="material-symbols-outlined draggable">
+            drag_handle
+          </span>
+            {{ todo().priority }}
+            <input type="checkbox" [checked]="todo().completed" (click)="setTodo(!todo().completed)">
+        </div>
           @if (onModify()) {
               <span [class.done]="todo().completed">
           {{ todo().title }}
@@ -31,22 +38,29 @@ import {JsonPipe} from "@angular/common";
           </div>
       </li>
       @if (!onModify() && editTitle.errors; as error) {
-        @if (error['required'] && editTitle.dirty && editTitle.touched ) {
-          <p class="error">
-            Need some value to modify this !
-          </p>
-        } 
-        @if (error['minlength']; as minLengthErr) {
-          <p class="error">
-            {{ minLengthErr['actualLength'] }} /
-            {{ minLengthErr['requiredLength'] }} Minimum length required
-          </p>
-        }
+          @if (error['required'] && editTitle.dirty && editTitle.touched) {
+              <p class="error">
+                  Need some value to modify this !
+              </p>
+          }
+          @if (error['minlength']; as minLengthErr) {
+              <p class="error">
+                  {{ minLengthErr['actualLength'] }} /
+                  {{ minLengthErr['requiredLength'] }} Minimum length required
+              </p>
+          }
       }
   `,
   styles: `
+    
+    .draggable {
+      cursor: grab;
+    }
+    
     .item {
       list-style: none;
+      padding: 5px;
+      border: 1px solid lightgray;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -55,6 +69,7 @@ import {JsonPipe} from "@angular/common";
 
     .config {
       display: flex;
+      align-items: center;
       gap: 10px;
     }
 

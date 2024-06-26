@@ -13,10 +13,15 @@ import {JsonPipe} from "@angular/common";
     JsonPipe,
   ],
     template: `
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
             <input type="text" formControlName="todoTitle"/>
             <button type="submit">Add</button>
         </form>
+        <section class="sort-container">
+            <button>Sort by: Priority</button>
+            <button>Sort by: Done</button>
+            <button>Sort by: Todo</button>
+        </section>
         @if (form.controls.todoTitle.errors; as error) {
           @if (error['required'] && form.controls.todoTitle.dirty && form.controls.todoTitle.touched ) {
             <p class="error">
@@ -37,9 +42,23 @@ import {JsonPipe} from "@angular/common";
         </ul>
     `,
     styles: `
+      .sort-container {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin: .5rem 0;
+      }
+      .form-container {
+        display: flex;
+        justify-content: center;
+      }
 
       .error, .ng-invalid {
         color: red;
+      }
+      
+      .error {
+        text-align: center;
       }
 
       .todos-container {
@@ -68,7 +87,8 @@ export class TodosComponent {
                 id: Date.now(),
                 title: this.form.controls.todoTitle.value,
                 completed: false,
-                userId: 1
+                userId: 1,
+                priority: this.todos().length +1
             })
             this.form.reset();
         }
