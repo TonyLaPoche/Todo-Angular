@@ -70,5 +70,16 @@ export class TodosService {
     }
 
 //     Check method update avec HashMap
-
+    sortby(key: keyof Todo) {
+        this.#todos.update((todos) => {
+            return todos.slice().sort((a, b) => {
+                if (key === 'priority' || key === 'id') {
+                    return (a[key] as number) - (b[key] as number);
+                } else if (key === 'completed') {
+                    return a.completed === b.completed ? 0 : a.completed ? 1 : -1;
+                }
+                return 0;
+            });
+        });
+    }
 }

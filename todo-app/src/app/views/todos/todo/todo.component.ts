@@ -13,9 +13,8 @@ import {JsonPipe} from "@angular/common";
   ],
   template: `
       <li class="item">
-          
-        <div class="config">
-          <span class="material-symbols-outlined draggable">
+        <div class="config" cdkDrag>
+          <span class="material-symbols-outlined draggable" cdkDragHandle>
             drag_handle
           </span>
             {{ todo().priority }}
