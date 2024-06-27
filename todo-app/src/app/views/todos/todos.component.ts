@@ -40,7 +40,7 @@ import {Todo} from './todos.model';
         }
         <ul class="todos-container" cdkDropList (cdkDropListDropped)="drop($event)">
             @for (todo of todos(); track todo.id) {
-                <app-todo [todo]="todo" cdkDrag></app-todo>
+                <app-todo [todo]="todo"></app-todo>
             }
         </ul>
     `,

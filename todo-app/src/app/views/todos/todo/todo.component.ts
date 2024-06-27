@@ -3,17 +3,20 @@ import {Todo} from "../todos.model";
 import {TodosService} from "../todos.service";
 import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {JsonPipe} from "@angular/common";
+import {CdkDrag, CdkDragHandle} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-todo',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    JsonPipe
+    JsonPipe,
+    CdkDragHandle,
+    CdkDrag
   ],
   template: `
-      <li class="item">
-        <div class="config" cdkDrag>
+      <li class="item" cdkDrag>
+        <div class="config" >
           <span class="material-symbols-outlined draggable" cdkDragHandle>
             drag_handle
           </span>
