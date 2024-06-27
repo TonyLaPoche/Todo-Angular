@@ -1,10 +1,10 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {CdkDragDrop, DragDropModule, moveItemInArray} from '@angular/cdk/drag-drop';
+import {JsonPipe} from "@angular/common";
 import {TodosService} from "./todos.service";
 import {TodoComponent} from "./todo/todo.component";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {JsonPipe} from "@angular/common";
 import {Todo} from './todos.model';
-import {CdkDragDrop, DragDropModule, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'app-todos',
@@ -12,8 +12,8 @@ import {CdkDragDrop, DragDropModule, moveItemInArray} from '@angular/cdk/drag-dr
     imports: [
         TodoComponent,
         ReactiveFormsModule,
-        JsonPipe,
-        DragDropModule
+        DragDropModule,
+        JsonPipe
     ],
     template: `
         <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
