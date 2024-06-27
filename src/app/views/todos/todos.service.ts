@@ -59,24 +59,19 @@ export class TodosService {
     }
 
     updateTodo(id: number, updatedTodo: Partial<Todo>) {
-        this.#todos.update((todos) => {
-            todos.forEach((todo) => {
-                if (todo.id === id) {
-                    Object.assign(todo, updatedTodo);
-                }
-            });
-            return todos;
-        });
+        this.#todos.update((todos) => todos.map((todo) => todo.id != id ? todo : {...todo, ...updatedTodo}));
     }
 
 //     Check method update avec HashMap
-    sortby(key: keyof Todo) {
+    sortBy(key: keyof Todo) {
         this.#todos.update((todos) => {
             return todos.slice().sort((a, b) => {
-                if (key === 'priority' || key === 'id') {
-                    return (a[key] as number) - (b[key] as number);
+                if (key === 'priority') {
+                    return a[key] - b[key];
                 } else if (key === 'completed') {
                     return a.completed === b.completed ? 0 : a.completed ? 1 : -1;
+                } else if (key === 'title') {
+                    return a.title.localeCompare(b.title)
                 }
                 return 0;
             });

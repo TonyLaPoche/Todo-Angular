@@ -5,6 +5,7 @@ import {JsonPipe} from "@angular/common";
 import {TodosService} from "./todos.service";
 import {TodoComponent} from "./todo/todo.component";
 import {Todo} from './todos.model';
+import {ValidationErrorDirective, ValidationErrorsComponent} from "ngx-valdemort";
 
 @Component({
     selector: 'app-todos',
@@ -13,7 +14,9 @@ import {Todo} from './todos.model';
         TodoComponent,
         ReactiveFormsModule,
         DragDropModule,
-        JsonPipe
+        JsonPipe,
+        ValidationErrorsComponent,
+        ValidationErrorDirective
     ],
     template: `
         <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
@@ -23,21 +26,15 @@ import {Todo} from './todos.model';
         <section class="sort-container">
             <button (click)="sortTodos('priority')">Sort by: Priority</button>
             <button (click)="sortTodos('completed')">Sort by: Done</button>
-            <button (click)="sortTodos('id')">Sort by: Todo</button>
+            <button (click)="sortTodos('title')">Sort by: Todo</button>
         </section>
-        @if (form.controls.todoTitle.errors; as error) {
-            @if (error['required'] && form.controls.todoTitle.dirty && form.controls.todoTitle.touched) {
-                <p class="error">
-                    Some value is required
-                </p>
-            }
-            @if (error['minlength']; as minLengthErr) {
-                <p class="error">
-                    {{ minLengthErr['actualLength'] }} /
-                    {{ minLengthErr['requiredLength'] }} Minimum length required
-                </p>
-            }
-        }
+        <val-errors [control]="form.controls.todoTitle" class="error">
+            <ng-template valError="required">Some value is required</ng-template>
+            <ng-template valError="minlength" let-error="error">
+                {{ error['actualLength'] }} /
+                {{ error['requiredLength'] }} Minimum length required
+            </ng-template>
+        </val-errors>
         <ul class="todos-container" cdkDropList (cdkDropListDropped)="drop($event)">
             @for (todo of todos(); track todo.id) {
                 <app-todo [todo]="todo"></app-todo>
@@ -77,7 +74,7 @@ import {Todo} from './todos.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodosComponent {
-    todoService = inject(TodosService);
+    private todoService = inject(TodosService);
     todos = this.todoService.todos;
     form = new FormGroup({
         todoTitle: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.minLength(5)]}),
@@ -92,14 +89,14 @@ export class TodosComponent {
                 title: this.form.controls.todoTitle.value,
                 completed: false,
                 userId: 1,
-                priority: this.todos().length + 1
+                priority: 1
             })
             this.form.reset();
         }
     }
 
     sortTodos(key: keyof Todo) {
-        this.todoService.sortby(key)
+        this.todoService.sortBy(key)
     }
 
     drop(event: CdkDragDrop<Todo[]>) {
