@@ -5,3 +5,5 @@
 - [x] Modifier une tache 
 - [x] Supprimer une tache
 - [x] Message d'erreur
+- [x] Déplacer une tache
+- [x] Trier une tache
