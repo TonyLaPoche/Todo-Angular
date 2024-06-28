@@ -19,14 +19,14 @@ import {ValidationErrorDirective, ValidationErrorsComponent} from "ngx-valdemort
         ValidationErrorDirective
     ],
     template: `
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
-            <input type="text" formControlName="todoTitle"/>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container"  >
+            <input type="text" formControlName="todoTitle" />
             <button type="submit">Add</button>
         </form>
         <section class="sort-container">
             <button (click)="sortTodos('priority')">Sort by: Priority</button>
-            <button (click)="sortTodos('completed')">Sort by: Done</button>
-            <button (click)="sortTodos('title')">Sort by: Todo</button>
+            <button (click)="sortTodos('completed')">Sort by: Todo</button>
+            <button (click)="sortTodos('title')">Sort by: Name</button>
         </section>
         <val-errors [control]="form.controls.todoTitle" class="error">
             <ng-template valError="required">Some value is required</ng-template>
@@ -42,6 +42,14 @@ import {ValidationErrorDirective, ValidationErrorsComponent} from "ngx-valdemort
         </ul>
     `,
     styles: `
+      
+      :host {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      
       .sort-container {
         display: flex;
         justify-content: center;
@@ -68,7 +76,6 @@ import {ValidationErrorDirective, ValidationErrorsComponent} from "ngx-valdemort
         gap: .5rem;
         border: 1px solid black;
         padding: 10px;
-        width: max-content;
       }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -81,8 +88,8 @@ export class TodosComponent {
     });
 
     onSubmit() {
-        this.form.controls.todoTitle.markAsTouched()
         this.form.controls.todoTitle.markAsDirty()
+
         if (this.form.valid) {
             this.todoService.addTodo({
                 id: Date.now(),

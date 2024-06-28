@@ -66,13 +66,13 @@ import {CdkDrag, CdkDragHandle} from "@angular/cdk/drag-drop";
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 400px;
+        gap: 2rem;
       }
 
       .config {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 5px;
       }
 
       .done {

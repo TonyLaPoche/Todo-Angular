@@ -13,7 +13,8 @@ import {TodosComponent} from "./views/todos/todos.component";
   `,
   styles: `
     :host {
-      width: 500px;
+      width: 80vw;
+      max-width: 500px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
